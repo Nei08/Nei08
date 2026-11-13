@@ -1,29 +1,26 @@
 <div align="center">
 
-<img src="assets/header.gif" alt="Esneider De La Hoz — desarrollador de software y fundador de Melma Ice y Kannde" width="100%">
+<img src="assets/name.png" alt="Esneider De La Hoz" width="560">
 
-Vengo del trabajo, y junto a mis amigos estoy sacando adelante dos empresas.<br>
-Soy el fundador de **Melma Ice** y **Kannde**, y me dedico a desarrollar software:<br>
-aplicaciones móviles **iOS** y **Android**, aplicaciones web y sitios web.
+### 🚀 Fundador & Desarrollador de Software
 
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <a href="https://melmaice.com/"><img src="assets/melma-ice-card.gif" alt="Melma Ice" width="400"></a>
-    </td>
-    <td align="center" width="50%">
-      <img src="assets/kannde-card.gif" alt="Kannde" width="400">
-    </td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://melmaice.com/">melmaice.com →</a></td>
-    <td align="center"><sub>sitio web · próximamente</sub></td>
-  </tr>
-</table>
+Dedicado al 100% a construir y escalar mis propias empresas.<br>
+Soy el fundador de **Kannde** y **Melma Ice**, proyectos que impulso junto a un gran equipo de trabajo que me respalda en cada paso.
+
+<a href="https://melmaice.com/"><img src="assets/melma-ice-card.gif" alt="Melma Ice" width="300"></a>&nbsp;&nbsp;<img src="assets/kannde-card.gif" alt="Kannde" width="300">
+
+<sub><a href="https://melmaice.com/">melmaice.com →</a> &nbsp;·&nbsp; Kannde: sitio web próximamente</sub>
+
+</div>
+
+### 🛠️ Lo que construyo
+
+- 📱 **Apps móviles:** desarrollo nativo y multiplataforma para iOS y Android.
+- 💻 **Desarrollo web:** aplicaciones web escalables y sitios de alto rendimiento.
+- ⚡ **Enfoque:** arquitectura sólida, ejecución rápida y soluciones reales.
 
 <!--
 CONTACTO (añadir cuando tengas los datos):
-**Contacto** · [Correo](mailto:TU_CORREO) · [Facebook](https://facebook.com/TU_PERFIL)
+### 📬 Contacto
+[Correo](mailto:TU_CORREO) · [Facebook](https://facebook.com/TU_PERFIL)
 -->
-
-</div>
