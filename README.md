@@ -1,49 +1,64 @@
 <div align="center">
 
-<img src="assets/banner.svg" alt="Esneider De La Hoz — Melma Ice × Kannde" width="100%">
+<img src="assets/header.png" alt="Esneider De La Hoz — fundador de Melma Ice y Kannde" width="100%">
+
+<img src="assets/motto.png" alt="Bailarín de la tormenta" width="100%">
 
 <br>
 
-# Esneider De La Hoz
-**Creador y fundador** · construyendo dos marcas desde cero
+Soy Esneider, tengo 24 años y estoy construyendo mis propias empresas desde cero:<br>
+aprendiendo, desarrollando ideas y convirtiéndolas en realidad.<br>
+No espero a que las circunstancias sean perfectas para avanzar.
 
-<br>
+<br><br>
+
+## Mis empresas
 
 <table>
   <tr>
-    <td align="center" width="50%" valign="top">
-      <img src="assets/melma-ice.gif" alt="Melma Ice — logotipo animado" width="320"><br><br>
-      <h3>Melma Ice</h3>
-      <sub>EMPRESA 01 · PRIMER PROYECTO</sub><br>
-      <sub>Mi primera empresa, en construcción.</sub><br><br>
-      <a href="#"><kbd>&nbsp;Sitio web · próximamente&nbsp;</kbd></a>
+    <td align="center" width="50%">
+      <a href="https://melmaice.com/"><img src="assets/melma-ice-card.gif" alt="Melma Ice — logotipo animado" width="100%"></a>
     </td>
-    <td align="center" width="50%" valign="top">
-      <img src="assets/kannde.gif" alt="Kannde — logotipo animado" width="260"><br><br>
-      <h3>Kannde</h3>
-      <sub>EMPRESA 02 · SEGUNDO PROYECTO</sub><br>
-      <sub>Mi segunda empresa, en construcción.</sub><br><br>
-      <a href="#"><kbd>&nbsp;Sitio web · próximamente&nbsp;</kbd></a>
+    <td align="center" width="50%">
+      <img src="assets/kannde-card.gif" alt="Kannde — logotipo animado" width="100%">
     </td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://melmaice.com/"><b>melmaice.com →</b></a></td>
+    <td align="center"><sub>Sitio web · próximamente</sub></td>
   </tr>
 </table>
 
-</div>
+<br>
+
+## Filosofía
+
+Construir con constancia, aprender sobre la marcha y seguir adelante,<br>
+con o sin tormenta.
 
 <br>
 
-## Sobre mí
+## Recorrido
 
-Creo, desarrollo y construyo proyectos empresariales. Hoy tengo dos en marcha, **Melma Ice** y **Kannde**, y trabajo en ellos de forma directa: desde la identidad de marca hasta su presencia digital.
+<img src="assets/timeline.png" alt="Kannde, aproximadamente 2 años de desarrollo. Melma Ice, aproximadamente 6 meses." width="100%">
 
-## Tecnologías y desarrollo
+<sub>Dos proyectos en etapas distintas, construidos en paralelo.</sub>
 
-<!-- Pendiente: añade aquí tus tecnologías, herramientas y habilidades cuando las definas. -->
-_Sección en preparación._
+<br><br>
+
+## Tecnologías y herramientas
+
+<sub>Próximamente.</sub>
+<!-- Añade aquí tus tecnologías reales cuando las tengas definidas. -->
 
 <br>
 
-<div align="center">
+## Contacto
+
+<sub>Enlaces profesionales · próximamente.</sub>
+<!-- Ejemplo: [LinkedIn](https://...) · [Instagram](https://...) · [Correo](mailto:...) -->
+
+<br>
 
 <sub>Esneider De La Hoz · Melma Ice × Kannde</sub>
 
