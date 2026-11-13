@@ -1,37 +1,50 @@
 <div align="center">
 
-<a href="https://nei08.github.io/nei08/">
-  <img src="assets/banner.svg" alt="Esneider de la Hoz — Melma Ice × Kannde" width="100%">
-</a>
-
-### 👋 Hola, soy **Esneider de la Hoz**
-Emprendedor y desarrollador front-end. Creo **ecosistemas digitales de alto nivel** y **conceptos de hardware**.
+<img src="assets/banner.svg" alt="Esneider De La Hoz — Melma Ice × Kannde" width="100%">
 
 <br>
 
-<a href="https://nei08.github.io/nei08/"><b>✨ Abrir el portafolio interactivo →</b></a><br>
-<sub>arrastra los logos, lánzalos, haz que choquen y suelta plumas doradas</sub>
+# Esneider De La Hoz
+**Creador y fundador** · construyendo dos marcas desde cero
 
-<br><br>
+<br>
 
 <table>
   <tr>
-    <td align="center" width="50%">
-      <a href="https://nei08.github.io/nei08/"><img src="assets/melma-ice.jpg" alt="Melma Ice" width="300"></a><br>
-      <b>🐻‍❄️ Melma Ice</b><br>
-      <sub>Empresa 01 · marca fría, sólida y con carácter</sub>
+    <td align="center" width="50%" valign="top">
+      <img src="assets/melma-ice.gif" alt="Melma Ice — logotipo animado" width="320"><br><br>
+      <h3>Melma Ice</h3>
+      <sub>EMPRESA 01 · PRIMER PROYECTO</sub><br>
+      <sub>Mi primera empresa, en construcción.</sub><br><br>
+      <a href="#"><kbd>&nbsp;Sitio web · próximamente&nbsp;</kbd></a>
     </td>
-    <td align="center" width="50%">
-      <a href="https://nei08.github.io/nei08/"><img src="assets/kannde.jpg" alt="Kannde" width="300"></a><br>
-      <b>😋 Kannde</b><br>
-      <sub>Empresa 02 · marca divertida, vibrante y con sabor</sub>
+    <td align="center" width="50%" valign="top">
+      <img src="assets/kannde.gif" alt="Kannde — logotipo animado" width="260"><br><br>
+      <h3>Kannde</h3>
+      <sub>EMPRESA 02 · SEGUNDO PROYECTO</sub><br>
+      <sub>Mi segunda empresa, en construcción.</sub><br><br>
+      <a href="#"><kbd>&nbsp;Sitio web · próximamente&nbsp;</kbd></a>
     </td>
   </tr>
 </table>
 
+</div>
+
 <br>
 
-![Front-end](https://img.shields.io/badge/Front--end-HTML%20%7C%20CSS%20%7C%20JS-f5c84a?style=for-the-badge&labelColor=10131c)
-![Fundador](https://img.shields.io/badge/Fundador-Melma%20Ice%20%C3%97%20Kannde-ff1f66?style=for-the-badge&labelColor=10131c)
+## Sobre mí
+
+Creo, desarrollo y construyo proyectos empresariales. Hoy tengo dos en marcha, **Melma Ice** y **Kannde**, y trabajo en ellos de forma directa: desde la identidad de marca hasta su presencia digital.
+
+## Tecnologías y desarrollo
+
+<!-- Pendiente: añade aquí tus tecnologías, herramientas y habilidades cuando las definas. -->
+_Sección en preparación._
+
+<br>
+
+<div align="center">
+
+<sub>Esneider De La Hoz · Melma Ice × Kannde</sub>
 
 </div>
