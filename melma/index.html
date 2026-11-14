@@ -6,97 +6,67 @@
 <meta name="theme-color" content="#ffffff">
 <title>Melma</title>
 <style>
-/* Melma — apertura con el logotipo de 7 esferas + Centro de Mando.
-   Secuencia: se arma → se abre, gira y se cierra → se separa → cada esfera vuela hacia la cámara
-   por su propio carril (perspectiva real) → el núcleo llega último y abre la app en rosado degradado. */
-:root{color-scheme:light;--bg:#ffffff;--ink:#141015;--muted:#6d5f68;--pink:#f52b91;--pink-deep:#c41f6c;--pink-soft:#ff8fc5;--track:#f1e4eb;
-  --line:#f3cfe0;--card:#ffffffb8;
-  --app-bg:radial-gradient(120% 90% at 50% 40%,#fff8fb 0%,#ffe9f3 40%,#ffd3e6 75%,#ffbcd9 100%)}
+/* ============================================================================
+   MELMA — APERTURA (archivo único)
+   Secuencia: el logo se arma → se abre, gira y se cierra → se separa →
+   cada esfera vuela hacia la cámara por su propio carril → el núcleo llega
+   último, abre un destello rosado degradado y todo termina en blanco limpio.
+   Al terminar no queda nada de la apertura: #melmaApp queda en blanco para
+   montar la aplicación real.
+   ========================================================================== */
+:root{color-scheme:light;--bg:#ffffff;--ink:#141015;--pink:#f52b91;--pink-deep:#c41f6c;--track:#f1e4eb;
+  --bloom:radial-gradient(circle at 50% 46%,#fff8fb 0%,#ffe6f1 30%,#ffc9e2 62%,#ff9fcb 100%)}
 *{box-sizing:border-box}
 html,body{width:100%;height:100%;margin:0;background:var(--bg)}
 body{overflow:hidden;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
-button{font:inherit}
 
-/* ===== APP (Centro de Mando) — vive detrás de la apertura desde el inicio ===== */
-.app{position:fixed;inset:0;overflow:auto;background:var(--app-bg);padding-block:clamp(22px,5vw,56px);
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.app-inner{max-width:1080px;margin:0 auto}
-.app-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:clamp(36px,8vw,64px)}
-.wordmark-row{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.22em}
-.wordmark-dot{width:9px;height:9px;border-radius:50%;background:var(--pink);box-shadow:0 0 14px var(--pink)}
-.app-status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
-.app-status i{width:7px;height:7px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 4px #f52b9122}
-.eyebrow{color:var(--pink-deep);font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
-.app h1{max-width:720px;margin:16px 0 14px;font-size:clamp(36px,7vw,72px);line-height:1.02;letter-spacing:-.05em;font-weight:650;text-wrap:balance}
-.app h1 span{color:var(--pink)}
-.lead{max-width:540px;margin:0;color:var(--muted);line-height:1.65;font-size:15px}
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:44px}
-.card{min-width:0;padding:22px;border:1px solid var(--line);border-radius:20px;background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 30px -14px #b51f6840}
-.card strong{display:block;margin-bottom:8px;font-size:15px}
-.card span{color:var(--muted);font-size:13px;line-height:1.5}
-.card b{display:block;margin-top:16px;font-size:26px;font-weight:650;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
-.replay{margin-top:36px;appearance:none;border:1px solid var(--line);background:#ffffffa0;color:var(--ink);border-radius:999px;padding:10px 16px;font-size:12px;cursor:pointer}
-.replay:hover{border-color:var(--pink-soft)}
-.replay:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
-@media(max-width:640px){.cards{grid-template-columns:1fr;gap:10px;margin-top:30px}}
-/* Entrada escalonada del contenido cuando la apertura termina. */
-.rise{opacity:0;transform:translateY(14px)}
-.app.is-live .rise{opacity:1;transform:none;transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0) * 70ms)}
+/* Contenedor de la aplicación real. Queda en blanco al terminar la apertura. */
+#melmaApp{position:fixed;inset:0;background:var(--bg)}
 
-/* ===== APERTURA ===== */
-.intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;overflow:hidden;pointer-events:none}
-.intro-bg{position:absolute;inset:0;background:var(--bg);transition:opacity .6s ease}
-.intro.is-opening .intro-bg{opacity:0}
-.intro.is-gone{display:none}
+/* ---------- Apertura ---------- */
+.intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;overflow:hidden;background:var(--bg);pointer-events:none}
+.intro[hidden]{display:none}
 .stage{position:relative;width:min(74vmin,480px);aspect-ratio:1;transform:translateY(-4vmin)}
 .stage.is-shaking{animation:shake .45s cubic-bezier(.36,.07,.19,.97)}
 .orb{position:absolute;left:50%;top:50%;border-radius:50%;opacity:0;will-change:transform,opacity;backface-visibility:hidden;
   box-shadow:0 0 0 1px #4a1a3240,0 0 14px 3px #6b5a6324,0 10px 24px -10px #7a2a5560}
 .orb img{width:100%;height:100%;display:block;border-radius:50%;user-select:none;-webkit-user-drag:none}
 .orb.is-charging{box-shadow:0 0 0 1px #4a1a3240,0 0 34px 8px #ff4da870,0 0 90px 26px #ff8fc540}
+
+/* Destello rosado degradado del golpe final; se disuelve a blanco. */
+.bloom{position:absolute;inset:0;z-index:40;background:var(--bloom);opacity:0;clip-path:circle(0% at 50% 46%)}
+.intro.is-impact .bloom{animation:bloom 1.1s cubic-bezier(.2,.75,.2,1) forwards}
 .ring{position:absolute;left:50%;top:46%;width:30vmin;aspect-ratio:1;margin:-15vmin 0 0 -15vmin;border-radius:50%;border:2px solid #ff7ab9;opacity:0;z-index:50}
 .intro.is-impact .ring{animation:ring .85s cubic-bezier(.15,.7,.25,1) forwards}
 .intro.is-impact .ring.r2{animation-delay:.1s;border-color:#ffd0e6}
 
+/* Marca + barra de carga minimalista. */
 .lockup{position:absolute;left:0;right:0;bottom:calc(max(10%,env(safe-area-inset-bottom,0px)) + 6px);display:flex;flex-direction:column;align-items:center;gap:14px;z-index:7;transition:opacity .5s ease,transform .5s ease}
 .lockup.is-hidden{opacity:0;transform:translateY(8px)}
 .lockup .word{font-size:13px;font-weight:700;letter-spacing:.62em;padding-left:.62em;color:var(--ink)}
-/* Barra minimalista que se abre desde el centro hacia los lados. */
 .track{position:relative;width:148px;height:2px;border-radius:99px;background:var(--track);overflow:hidden}
-.track span{position:absolute;inset:0;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--pink-deep) 50%,var(--pink));transform:scaleX(0);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.track span{position:absolute;inset:0;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--pink-deep) 50%,var(--pink));transform:scaleX(0)}
 .status{min-height:14px;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);transition:opacity .2s ease}
 .status.is-swapping{opacity:0}
 
+/* Solo para pruebas: aparece si la URL termina en #demo. */
+.demo-replay{position:fixed;z-index:30;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));appearance:none;border:1px solid #f0c7db;background:#fff;color:var(--ink);border-radius:999px;padding:10px 16px;font:500 12px/1 Inter,system-ui,sans-serif;cursor:pointer}
+.demo-replay:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+
 @keyframes shake{0%,100%{transform:translate(0,-4vmin)}20%{transform:translate(-4px,calc(-4vmin + 3px))}40%{transform:translate(4px,calc(-4vmin - 2px))}60%{transform:translate(-3px,calc(-4vmin - 1px))}80%{transform:translate(2px,calc(-4vmin + 1px))}}
 @keyframes ring{0%{opacity:.95;transform:scale(.25)}100%{opacity:0;transform:scale(4.2)}}
-@media(prefers-reduced-motion:reduce){.stage.is-shaking{animation:none}.app.is-live .rise{transition:opacity .4s ease;transform:none}}
+@keyframes bloom{0%{opacity:1;clip-path:circle(0% at 50% 46%)}45%{opacity:1;clip-path:circle(150% at 50% 46%)}100%{opacity:0;clip-path:circle(150% at 50% 46%)}}
+@media(prefers-reduced-motion:reduce){.stage.is-shaking{animation:none}}
 </style>
 </head>
 <body>
 
-<main class="app" id="app" aria-label="Centro de Mando de Melma">
-  <div class="app-inner">
-    <header class="app-top">
-      <div class="wordmark-row rise" style="--i:0"><span class="wordmark-dot"></span>MELMA</div>
-      <div class="app-status rise" style="--i:1"><i></i>Centro de mando</div>
-    </header>
-    <section>
-      <div class="eyebrow rise" style="--i:2">Tu espacio · Tu equipo · Tu impulso</div>
-      <h1 class="rise" style="--i:3">Todo empieza desde <span>un mismo lugar.</span></h1>
-      <p class="lead rise" style="--i:4">Tus tareas, proyectos y equipo, conectados en un solo espacio. Retoma justo donde lo dejaste.</p>
-      <div class="cards">
-        <article class="card rise" style="--i:5"><strong>Mis tareas</strong><span>Organiza tus prioridades y avances.</span><b>12</b></article>
-        <article class="card rise" style="--i:6"><strong>Proyectos</strong><span>Visualiza el trabajo de tu equipo.</span><b>4</b></article>
-        <article class="card rise" style="--i:7"><strong>Centro de Mando</strong><span>Todo conectado en un solo espacio.</span><b>100%</b></article>
-      </div>
-      <button class="replay rise" style="--i:8" id="replayBtn" type="button">↻ Ver la apertura otra vez</button>
-    </section>
-  </div>
-</main>
+<!-- Aquí se monta la aplicación real de Melma. -->
+<main id="melmaApp" aria-label="Melma"></main>
 
 <section class="intro" id="intro" aria-label="Presentación de Melma">
-  <div class="intro-bg"></div>
   <div class="stage" id="stage" aria-hidden="true"></div>
+  <div class="bloom" aria-hidden="true"></div>
   <div class="ring" aria-hidden="true"></div><div class="ring r2" aria-hidden="true"></div>
   <div class="lockup" id="lockup">
     <div class="word">MELMA</div>
@@ -104,6 +74,8 @@ button{font:inherit}
     <div class="status" id="status" aria-live="polite">Abriendo Melma</div>
   </div>
 </section>
+
+<button class="demo-replay" id="demoReplay" type="button" hidden>↻ Repetir apertura</button>
 
 <script>
 (() => {
@@ -125,28 +97,24 @@ button{font:inherit}
   const T = {
     assemble: 1000,   // el logo se arma
     dance: 3000,      // se abre, da una vuelta y se cierra
-    separate: 450,    // se separa un poco para que ninguna esfera roce a otra al salir
+    separate: 450,    // se separa para que ninguna esfera roce a otra al salir
     launchGap: 300,   // salen una por una, en orden horario
     launchDur: 950,   // vuelo hacia la cámara
     chargeDur: 420,   // el núcleo toma impulso
-    strikeDur: 800,   // el núcleo viene hacia ti y abre la app
-    exit: 380
+    strikeDur: 800,   // el núcleo viene hacia ti
+    exit: 1100        // el destello rosado se disuelve a blanco
   };
   const RADIUS = 0.29, SAT = 0.249, CORE = 0.335; // proporciones exactas del logotipo
-  const OPEN = 0.5;          // apertura durante el giro
-  const GAP = 0.2;           // separación antes de las salidas
-  const MAX_SCALE = 7;       // tamaño aparente al pasar junto a la cámara
-  const TWIST = 28;          // giro en espiral durante el vuelo (grados)
+  const OPEN = 0.5, GAP = 0.2, MAX_SCALE = 7, TWIST = 28;
   const DRIFT = (Math.PI * 2) * 0.04 / 1000;
-
   const SATS = [
     { key: 'top', angle: -90 }, { key: 'upperRight', angle: -30 }, { key: 'lowerRight', angle: 30 },
     { key: 'bottom', angle: 90 }, { key: 'lowerLeft', angle: 150 }, { key: 'upperLeft', angle: 210 }
   ];
 
   const $ = id => document.getElementById(id);
-  const intro = $('intro'), stage = $('stage'), app = $('app'), lockup = $('lockup');
-  const statusEl = $('status'), track = $('track'), progressEl = $('progress');
+  const intro = $('intro'), stage = $('stage'), lockup = $('lockup');
+  const statusEl = $('status'), track = $('track'), progressEl = $('progress'), demoBtn = $('demoReplay');
 
   /* ===== 3. UTILIDADES ==================================================== */
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -157,10 +125,9 @@ button{font:inherit}
   const easeOutBack = t => { const c = 1.5; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
   const smooth = (a, b, t) => { const x = clamp((t - a) / (b - a)); return x * x * (3 - 2 * x); };
   const deg = d => d * Math.PI / 180;
-  // Proyección en perspectiva: e = 0 (en el logo) → e = 1 (junto a la cámara).
-  const perspective = (e, max) => 1 / (1 - (1 - 1 / max) * e);
+  const perspective = (e, max) => 1 / (1 - (1 - 1 / max) * e); // 0 = en el logo, 1 = junto a la cámara
 
-  /* ===== 4. CONSTRUCCIÓN ================================================== */
+  /* ===== 4. CONSTRUCCIÓN (una sola vez) =================================== */
   function makeOrb(key, size) {
     const el = document.createElement('div');
     el.className = 'orb';
@@ -174,13 +141,12 @@ button{font:inherit}
   }
   const satEls = SATS.map(s => makeOrb(s.key, SAT));
   const coreEl = makeOrb('center', CORE);
-  let S = stage.getBoundingClientRect().width;
-  window.addEventListener('resize', () => { S = stage.getBoundingClientRect().width; });
+  const allOrbs = [...satEls, coreEl];
 
   /* ===== 5. HÁPTICOS (sin interfaz; solo en el primer arranque) =========== */
-  let hapticsOn = true;
+  let firstRun = true;
   function haptic(kind) {
-    if (!hapticsOn || reduceMotion) return;
+    if (!firstRun || reduceMotion) return;
     try {
       const bridge = window.MelmaHaptics;
       if (bridge && bridge.supported !== false) return kind === 'logo' ? bridge.logoPulse && bridge.logoPulse() : bridge.entryPulse && bridge.entryPulse();
@@ -191,10 +157,10 @@ button{font:inherit}
     } catch (_) {}
   }
 
-  /* ===== 6. CARGA: barra + estado ========================================= */
-  // Para esperar a tus datos reales: window.MELMA_WAIT_FOR_APP = true antes de este script
-  // y llama MelmaStartup.markReady() cuando terminen. Mientras tanto el logo sigue girando.
-  let hostProgress = 0, shown = 0, statusText = '';
+  /* ===== 6. CARGA REAL (opcional) ========================================= */
+  // Para esperar a tus datos: window.MELMA_WAIT_FOR_APP = true antes de este script
+  // y llama MelmaStartup.markReady() cuando terminen. Mientras, el logo sigue girando.
+  let hostProgress = 0;
   let hostReady = window.MELMA_WAIT_FOR_APP !== true || window.MELMA_APP_READY === true;
   window.MelmaStartup = {
     setProgress: v => { hostProgress = Math.max(hostProgress, clamp(Number(v) || 0, 0, 100)); },
@@ -202,27 +168,33 @@ button{font:inherit}
   };
   window.dispatchEvent(new Event('melma:startup-api-ready'));
 
-  function renderProgress(pct) {
-    const target = hostReady ? pct : Math.min(pct, Math.max(hostProgress, 12) * 0.95);
-    shown = Math.max(shown, target);
-    progressEl.style.transform = `scaleX(${(shown / 100).toFixed(3)})`;
-    track.setAttribute('aria-valuenow', String(Math.round(shown)));
-    const label = shown < 34 ? 'Abriendo Melma' : shown < 78 ? 'Cargando tus datos' : 'Preparando tu espacio';
-    if (label !== statusText) {
-      statusText = label;
-      statusEl.classList.add('is-swapping');
-      setTimeout(() => { statusEl.textContent = label; statusEl.classList.remove('is-swapping'); }, 160);
-    }
+  /* ===== 7. ESTADO DE CADA REPRODUCCIÓN =================================== */
+  // Todo el estado vive en "run". Cada reproducción crea uno nuevo y cancela el anterior,
+  // así repetir la apertura las veces que sea siempre arranca igual que la primera.
+  let run = null;
+  const timers = new Set();
+  function later(fn, ms) {
+    const id = setTimeout(() => { timers.delete(id); fn(); }, ms);
+    timers.add(id);
+  }
+  function stopEverything() {
+    if (run) { run.alive = false; cancelAnimationFrame(run.raf); }
+    timers.forEach(clearTimeout); timers.clear();
   }
 
-  /* ===== 7. MOTOR ========================================================= */
-  const danceEnd = T.assemble + T.dance;
-  const launchBase = danceEnd + T.separate;
-  const lastLaunch = launchBase + (SATS.length - 1) * T.launchGap;
-  const chargeAt = lastLaunch + T.launchDur * 0.45;
-  const strikeAt = chargeAt + T.chargeDur;
-
-  let raf = 0, tStart = 0, tPrev = 0, hold = 0, logoPulsed = false, opened = false, impacted = false, finished = false;
+  function setStatus(r, label) {
+    if (label === r.statusText) return;
+    r.statusText = label;
+    statusEl.classList.add('is-swapping');
+    later(() => { if (r.alive) { statusEl.textContent = label; statusEl.classList.remove('is-swapping'); } }, 160);
+  }
+  function renderProgress(r, pct) {
+    const target = hostReady ? pct : Math.min(pct, Math.max(hostProgress, 12) * 0.95);
+    r.shown = Math.max(r.shown, target);
+    progressEl.style.transform = `scaleX(${(r.shown / 100).toFixed(3)})`;
+    track.setAttribute('aria-valuenow', String(Math.round(r.shown)));
+    setStatus(r, r.shown < 34 ? 'Abriendo Melma' : r.shown < 78 ? 'Cargando tus datos' : 'Preparando tu espacio');
+  }
 
   function place(el, x, y, scale, opacity, z) {
     el.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) scale(${scale.toFixed(4)})`;
@@ -230,120 +202,124 @@ button{font:inherit}
     el.style.zIndex = z;
   }
 
-  function frame(now) {
-    if (!tStart) { tStart = now; tPrev = now; }
-    const t = now - tStart, dt = now - tPrev; tPrev = now;
-    // Si la app aún carga, el logo sigue girando antes de las salidas.
-    if (!hostReady && t - hold > launchBase - 60) hold += dt;
-    const L = t - hold;
+  /* ===== 8. MOTOR ========================================================= */
+  const danceEnd = T.assemble + T.dance;
+  const launchBase = danceEnd + T.separate;
+  const chargeAt = launchBase + (SATS.length - 1) * T.launchGap + T.launchDur * 0.45;
+  const strikeAt = chargeAt + T.chargeDur;
+
+  function frame(r, now) {
+    if (!r.alive) return;
+    if (r.start === null) { r.start = now; r.prev = now; }
+    let dt = now - r.prev; r.prev = now;
+    // Si la pestaña se pausó, la animación continúa donde iba (sin saltos).
+    if (dt > 120) { r.start += dt - 16; dt = 16; }
+    const t = now - r.start;
+    if (!hostReady && t - r.hold > launchBase - 60) r.hold += dt;
+    const L = t - r.hold;
+    const S = stage.offsetWidth; // se mide en cada cuadro: nunca queda en 0 ni desfasado
 
     const u = clamp((t - T.assemble) / T.dance);
     const theta = Math.PI * 2 * easeInOutSine(u) + DRIFT * Math.max(0, t - danceEnd);
     const openAmt = Math.pow(Math.sin(Math.PI * easeInOutSine(u)), 1.3);
-    const sep = smooth(danceEnd, launchBase, L);
-    const ring = RADIUS * S * (1 + OPEN * openAmt + GAP * sep);
+    const ring = RADIUS * S * (1 + OPEN * openAmt + GAP * smooth(danceEnd, launchBase, L));
 
     SATS.forEach((s, i) => {
       const a = clamp((t - 260 - i * 90) / 640);
       const p = clamp((L - (launchBase + i * T.launchGap)) / T.launchDur);
       const ang = deg(s.angle) + theta + deg(TWIST) * easeInSine(p);
-      const r = ring * lerp(0.2, 1, easeOutCubic(a));
-      // Cada esfera avanza hacia la cámara por su propio carril radial: al acercarse,
-      // la perspectiva la abre hacia el borde, así nunca se cruza ni tapa a las demás.
+      const rr = ring * lerp(0.2, 1, easeOutCubic(a));
+      // Cada esfera avanza hacia la cámara por su propio carril radial: nunca se cruzan.
       const k = perspective(easeInSine(p), MAX_SCALE);
       const base = lerp(0.4, 1, easeOutBack(a)) * (1 - 0.06 * openAmt);
-      const opacity = a * (1 - smooth(0.82, 1, p));
-      place(satEls[i], Math.cos(ang) * r * k, Math.sin(ang) * r * k, base * k, opacity, p > 0 ? 10 + Math.round(k * 4) : 2);
+      place(satEls[i], Math.cos(ang) * rr * k, Math.sin(ang) * rr * k, base * k,
+        a * (1 - smooth(0.82, 1, p)), p > 0 ? 10 + Math.round(k * 4) : 2);
     });
 
-    // Núcleo: late, se carga y viene directo hacia ti; detrás aparece la app.
     const ca = clamp((t - 60) / 700);
     let cs = lerp(0.4, 1, easeOutBack(ca)) * (1 + 0.04 * openAmt);
     cs *= 1 + 0.02 * Math.sin(t / 380) * smooth(danceEnd, danceEnd + 400, t);
     const c = clamp((L - chargeAt) / T.chargeDur);
-    if (c > 0) { coreEl.classList.add('is-charging'); cs *= 1 - 0.14 * easeOutCubic(c); }
+    coreEl.classList.toggle('is-charging', c > 0);
+    if (c > 0) cs *= 1 - 0.14 * easeOutCubic(c);
     const k = clamp((L - strikeAt) / T.strikeDur);
-    const ck = perspective(easeInSine(k), 16);
-    place(coreEl, 0, 0, cs * ck, ca * (1 - smooth(0.78, 1, k)), k > 0 ? 60 : 5);
+    place(coreEl, 0, 0, cs * perspective(easeInSine(k), 16), ca * (1 - smooth(0.82, 1, k)), k > 0 ? 60 : 5);
 
-    if (!opened && k >= 0.6) {           // la app empieza a aparecer detrás del núcleo
-      opened = true;
-      intro.classList.add('is-opening');
-    }
-    if (!impacted && k >= 0.82) {           // el golpe: ondas, sacudida y contenido en escena
-      impacted = true;
+    renderProgress(r, 100 * smooth(0, launchBase - 300, t));
+    lockup.classList.toggle('is-hidden', L > danceEnd + 100);
+    if (!r.logoPulsed && t > 700) { r.logoPulsed = true; haptic('logo'); }
+
+    if (!r.impacted && k >= 0.82) {
+      r.impacted = true;
       intro.classList.add('is-impact');
       stage.classList.add('is-shaking');
-      app.classList.add('is-live');
       haptic('entry');
+      later(() => finish(r), T.exit);
     }
-    if (k >= 1) { setTimeout(finish, T.exit); return; }
-
-    renderProgress(100 * smooth(0, launchBase - 300, t));
-    if (L > danceEnd + 100) lockup.classList.add('is-hidden');
-    if (!logoPulsed && t > 700) { logoPulsed = true; haptic('logo'); }
-    raf = requestAnimationFrame(frame);
+    if (k < 1) r.raf = requestAnimationFrame(n => frame(r, n));
   }
 
-  function finish() {
-    if (finished) return;
-    finished = true;
-    cancelAnimationFrame(raf);
-    app.classList.add('is-live');
-    intro.classList.add('is-gone');
+  function finish(r) {
+    if (!r.alive) return;
+    r.alive = false;
+    cancelAnimationFrame(r.raf);
+    intro.hidden = true;              // no queda nada: pantalla en blanco
+    firstRun = false;
+    if (demoBtn && location.hash === '#demo') demoBtn.hidden = false;
     window.dispatchEvent(new CustomEvent('melma:intro-complete'));
   }
 
-  function reset() {
-    finished = opened = impacted = logoPulsed = false;
-    tStart = 0; hold = 0; shown = 0; statusText = '';
-    S = stage.getBoundingClientRect().width;
-    intro.classList.remove('is-gone', 'is-opening', 'is-impact');
+  function resetScene() {
+    intro.hidden = false;             // primero se muestra, luego se mide y se dibuja
+    intro.classList.remove('is-impact');
     stage.classList.remove('is-shaking');
     coreEl.classList.remove('is-charging');
     lockup.classList.remove('is-hidden');
-    app.classList.remove('is-live');
+    statusEl.classList.remove('is-swapping');
     statusEl.textContent = 'Abriendo Melma';
-    [...satEls, coreEl].forEach(el => { el.style.opacity = '0'; });
+    progressEl.style.transform = 'scaleX(0)';
+    track.setAttribute('aria-valuenow', '0');
+    allOrbs.forEach(el => { el.style.transform = 'scale(.4)'; el.style.opacity = '0'; el.style.zIndex = ''; });
+    void intro.offsetWidth;           // reinicia las animaciones CSS (ondas, destello, sacudida)
   }
 
   function play() {
-    reset();
-    if (reduceMotion) return playReduced();
-    raf = requestAnimationFrame(frame);
+    stopEverything();
+    resetScene();
+    if (demoBtn) demoBtn.hidden = true;
+    const r = run = { alive: true, raf: 0, start: null, prev: 0, hold: 0, shown: 0,
+      statusText: 'Abriendo Melma', logoPulsed: false, impacted: false };
+    if (reduceMotion) return playReduced(r);
+    r.raf = requestAnimationFrame(n => frame(r, n));
   }
 
-  // Movimiento reducido: logo armado, barra completa y fundido a la app.
-  function playReduced() {
+  // Movimiento reducido: logo armado, barra completa y fundido a blanco.
+  function playReduced(r) {
+    const S = stage.offsetWidth;
     SATS.forEach((s, i) => place(satEls[i], Math.cos(deg(s.angle)) * RADIUS * S, Math.sin(deg(s.angle)) * RADIUS * S, 1, 1, 2));
     place(coreEl, 0, 0, 1, 1, 5);
-    let p = 0;
-    const tick = setInterval(() => {
-      p += 10; renderProgress(p);
-      if (p >= 100 && hostReady) {
-        clearInterval(tick);
-        intro.classList.add('is-opening');
-        stage.style.transition = 'opacity .5s ease'; stage.style.opacity = '0';
+    const step = () => {
+      if (!r.alive) return;
+      renderProgress(r, r.shown + 10);
+      if (r.shown >= 100 && hostReady) {
         lockup.classList.add('is-hidden');
-        setTimeout(() => { stage.style.opacity = ''; stage.style.transition = ''; finish(); }, 600);
-      }
-    }, 120);
+        allOrbs.forEach(el => { el.style.transition = 'opacity .5s ease'; el.style.opacity = '0'; });
+        later(() => { allOrbs.forEach(el => { el.style.transition = ''; }); finish(r); }, 600);
+      } else later(step, 120);
+    };
+    later(step, 200);
   }
 
-  /* ===== 8. ARRANQUE ====================================================== */
-  async function boot() {
-    const imgs = [...stage.querySelectorAll('img')];
-    await Promise.race([
-      Promise.all(imgs.map(img => img.decode ? img.decode().catch(() => {}) : Promise.resolve())),
-      new Promise(r => setTimeout(r, 2500))
-    ]);
-    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-    play();
-  }
+  /* ===== 9. ARRANQUE ====================================================== */
+  // API pública: MelmaIntro.replay() vuelve a reproducir la apertura sin vibración.
+  window.MelmaIntro = { replay: play };
+  if (demoBtn) demoBtn.addEventListener('click', play);
 
-  // "Ver la apertura otra vez": repite la secuencia sin vibrar (la vibración es solo del arranque).
-  $('replayBtn').addEventListener('click', () => { hapticsOn = false; play(); });
-  boot();
+  const imgs = [...stage.querySelectorAll('img')];
+  Promise.race([
+    Promise.all(imgs.map(img => img.decode ? img.decode().catch(() => {}) : Promise.resolve())),
+    new Promise(r => setTimeout(r, 2500))
+  ]).then(() => requestAnimationFrame(() => requestAnimationFrame(play)));
 })();
 </script>
 </body>
